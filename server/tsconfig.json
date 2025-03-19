@@ -2,11 +2,12 @@
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "nodenext",
-    "baseUrl": "src",
-    "outDir": "dist",
+    "target": "ES2020",
     "sourceMap": true,
-    "noImplicitAny": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "strict": true
   },
-  "include": ["src/**/*", "express.d.ts"]
+  "include": ["src/**/*", "express.d.ts"],
+  "exclude": ["node_modules"]
 }
