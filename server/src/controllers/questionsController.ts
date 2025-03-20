@@ -2,8 +2,32 @@ import express from "express";
 import { firebase } from "../utils/firebase";
 import { Question } from "../types/Question";
 
-export const getQuestion = (req: express.Request, res: express.Response) => {
-  res.status(200).json({ message: "Success" });
+export const getQuestion = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const date = req.query.date
+      ? new Date(Date.parse(req.query.date as string)).toLocaleDateString()
+      : new Date().toLocaleDateString();
+    const questionsCollection = firebase.firestore().collection("questions");
+
+    const query = questionsCollection.where("date", "==", date);
+    const querySnapshot = await query.get();
+    if (querySnapshot.docs.length === 0) {
+      res
+        .status(404)
+        .json({ message: "Question for this date doesn't exist...yet" });
+      return;
+    }
+    const question = querySnapshot.docs[0].data();
+    res.status(200).json(question);
+    return;
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ message: "Something went wrong" });
+    return;
+  }
 };
 
 export const addQuestions = async (
@@ -34,7 +58,7 @@ export const addQuestions = async (
         date.setDate(latestDate.getDate() + index);
         return {
           ...question,
-          date: date.toISOString(),
+          date: date.toLocaleDateString(),
         };
       }
     );
