@@ -1,5 +1,5 @@
 import express from "express";
-import { firebase } from "../utils/firebase";
+import { firestore } from "../utils/firebase";
 import { Question } from "../types/Question";
 
 export const getQuestion = async (
@@ -10,7 +10,7 @@ export const getQuestion = async (
     const date = req.query.date
       ? new Date(Date.parse(req.query.date as string)).toLocaleDateString()
       : new Date().toLocaleDateString();
-    const questionsCollection = firebase.firestore().collection("questions");
+    const questionsCollection = firestore.collection("questions");
 
     const query = questionsCollection.where("date", "==", date);
     const querySnapshot = await query.get();
@@ -41,7 +41,7 @@ export const addQuestions = async (
       res.status(400).json({ message: "Missing questions in body" });
     }
 
-    const questionsCollection = firebase.firestore().collection("questions");
+    const questionsCollection = firestore.collection("questions");
     const latestQuestion = await questionsCollection
       .orderBy("timestamp", "desc")
       .limit(1)
@@ -63,7 +63,7 @@ export const addQuestions = async (
       }
     );
 
-    const batch = firebase.firestore().batch();
+    const batch = firestore.batch();
 
     questionsWithDates.forEach((question: Question) => {
       batch.create(questionsCollection.doc(), question);

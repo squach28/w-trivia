@@ -16,6 +16,8 @@ if (!serviceAccountPath) {
 
 const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
 
-export const firebase = admin.initializeApp({
+const firebase = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
+export const firestore = firebase.firestore();
