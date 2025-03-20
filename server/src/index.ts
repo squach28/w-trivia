@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { questionsRouter } from "./routes/questionsRouter";
+import { firebase } from "./utils/firebase";
 
 dotenv.config();
 
