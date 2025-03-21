@@ -1,12 +1,12 @@
-import { Link } from "@tanstack/react-router";
+import { AppBar, Box, Typography } from "@mui/material";
 
 const Navbar = () => {
   return (
-    <ul>
-      <li>
-        <Link to="/">w-trivia</Link>
-      </li>
-    </ul>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar component="nav" position="static" sx={{ p: 1 }}>
+        <Typography variant="h5">w-trivia</Typography>
+      </AppBar>
+    </Box>
   );
 };
 
