@@ -21,7 +21,9 @@ export const getQuestion = async (
       return;
     }
     const result = querySnapshot.docs[0].data();
+    const id = querySnapshot.docs[0].id;
     const question = {
+      id,
       type: result.type,
       question: result.question,
       category: result.category,
