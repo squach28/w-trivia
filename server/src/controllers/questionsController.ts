@@ -20,7 +20,17 @@ export const getQuestion = async (
         .json({ message: "Question for this date doesn't exist...yet" });
       return;
     }
-    const question = querySnapshot.docs[0].data();
+    const result = querySnapshot.docs[0].data();
+    const id = querySnapshot.docs[0].id;
+    const question = {
+      id,
+      type: result.type,
+      question: result.question,
+      category: result.category,
+      correctAnswer: result.correct_answer,
+      incorrectAnswers: result.incorrect_answers,
+      date: result.date,
+    };
     res.status(200).json(question);
     return;
   } catch (e) {
