@@ -8,4 +8,6 @@ RUN npm install
 
 COPY . /app
 
-CMD ["npm", "run", "dev"]
+RUN npx tsc
+
+CMD ["node", "dist/index.js"]
