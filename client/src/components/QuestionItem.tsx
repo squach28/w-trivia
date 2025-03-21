@@ -17,6 +17,7 @@ const QuestionItem = ({ question }: QuestionProps) => {
     <article className="md:max-w-lg md:mx-auto mt-4">
       <Paper elevation={4} sx={{ p: 2 }}>
         <Stack spacing={4}>
+          <Typography>{question.date}</Typography>
           <Typography variant="h5" textAlign="center">
             {question.category}
           </Typography>
