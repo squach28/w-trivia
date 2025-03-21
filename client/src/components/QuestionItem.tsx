@@ -31,14 +31,14 @@ const QuestionItem = ({ question }: QuestionProps) => {
 };
 
 interface QuestionOptionsProps {
-  options: Array<String>;
+  options: Array<string>;
 }
 
 const QuestionOptions = ({ options }: QuestionOptionsProps) => {
   return (
-    <Grid2 container spacing={2} sx={{}}>
+    <Grid2 container spacing={2}>
       {options.map((option) => (
-        <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
+        <Grid2 key={option} size={{ xs: 12, sm: 12, md: 6 }}>
           <Button fullWidth variant="outlined">
             {option}
           </Button>
