@@ -68,7 +68,7 @@ const QuestionOptions = ({
   return (
     <Grid2 container spacing={2}>
       {options.map((option) => (
-        <Grid2 key={option} size={{ xs: 12, sm: 12, md: 6 }}>
+        <Grid2 key={option} size={12}>
           <Button
             fullWidth
             variant="outlined"
