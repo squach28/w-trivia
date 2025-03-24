@@ -1,4 +1,4 @@
-import { AppBar, Box, IconButton, Typography, useTheme } from "@mui/material";
+import { AppBar, Box, IconButton, Typography } from "@mui/material";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import { Link } from "@tanstack/react-router";
 const Navbar = () => {
@@ -34,7 +34,8 @@ export const StreakButton = () => {
           gap: 0.5,
           backgroundColor: "white",
           borderRadius: "25px",
-          p: 0.5,
+          px: 1,
+          py: 0.5,
         }}
       >
         <LocalFireDepartmentIcon color="error" />
