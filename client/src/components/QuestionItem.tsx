@@ -13,14 +13,14 @@ interface QuestionProps {
   question: Question;
 }
 
+const parseHTML = (html: string) => {
+  const parser = new DOMParser().parseFromString(html, "text/html");
+  return parser.body.textContent || "";
+};
+
 const QuestionItem = ({ question }: QuestionProps) => {
   const options = [...question.incorrectAnswers, question.correctAnswer];
   const [userGuess, setUserGuess] = useState<string | null>(null);
-
-  const parseHTML = (html: string) => {
-    const parser = new DOMParser().parseFromString(html, "text/html");
-    return parser.body.textContent || "";
-  };
 
   const onOptionClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
     const option = e.currentTarget.textContent;
@@ -68,7 +68,7 @@ const QuestionOptions = ({
   return (
     <Grid2 container spacing={2}>
       {options.map((option) => (
-        <Grid2 key={option} size={{ xs: 12, sm: 12, md: 6 }}>
+        <Grid2 key={option} size={12}>
           <Button
             fullWidth
             variant="outlined"
@@ -94,7 +94,7 @@ const QuestionOptions = ({
               },
             }}
           >
-            {option}
+            {parseHTML(option)}
           </Button>
         </Grid2>
       ))}
