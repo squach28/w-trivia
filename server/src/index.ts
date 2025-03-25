@@ -13,6 +13,7 @@ const app = express();
 
 const corsOption = loadOrigins();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOption));
 app.use(express.json());
 
