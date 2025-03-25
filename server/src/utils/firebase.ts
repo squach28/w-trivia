@@ -6,7 +6,6 @@ import path from "path";
 dotenv.config();
 
 const serviceAccountPath = path.join(
-  process.cwd(),
   process.env.FIREBASE_SERVICE_ACCOUNT_PATH as string
 );
 
