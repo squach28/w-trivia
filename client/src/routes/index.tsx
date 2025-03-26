@@ -61,10 +61,15 @@ function HomeComponent() {
   }, []);
   return (
     <main className="p-4">
-      {loading ? <CircularProgress /> : null}
+      {loading ? <CircularProgress sx={{ mx: "auto" }} /> : null}
       {question ? <QuestionItem question={question} /> : null}
       {!loading && question === null ? (
-        <Typography>You answered today's question!</Typography>
+        <Typography
+          variant="h6"
+          sx={{ width: "50%", mt: 2, mx: "auto", textAlign: "center" }}
+        >
+          You answered today's question!
+        </Typography>
       ) : null}
     </main>
   );
