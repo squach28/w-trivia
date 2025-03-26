@@ -35,6 +35,7 @@ function HomeComponent() {
 
     const isQuestionAnswered = async (date: Date) => {
       try {
+        setLoading(true);
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/responses?userId=${localStorage.getItem("uuid")}&date=${date}`
         );
@@ -46,6 +47,8 @@ function HomeComponent() {
       } catch (e) {
         console.log(e);
         throw new Error("Failed to fetch");
+      } finally {
+        setLoading(false);
       }
     };
 
