@@ -34,7 +34,28 @@ function HomeComponent() {
       }
     };
 
-    fetchQuestion();
+    const isQuestionAnswered = async (date: Date) => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/responses?userId=${localStorage.getItem("uuid")}&date=${date}`
+        );
+        if (response.ok) {
+          return true;
+        }
+
+        return false;
+      } catch (e) {
+        console.log(e);
+        throw new Error("Failed to fetch");
+      }
+    };
+
+    isQuestionAnswered(new Date()).then((result) => {
+      if (result) {
+      } else {
+        fetchQuestion();
+      }
+    });
   }, []);
   return (
     <main className="p-4">
