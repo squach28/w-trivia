@@ -25,6 +25,19 @@ const QuestionItem = ({ question }: QuestionProps) => {
   const onOptionClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
     const option = e.currentTarget.textContent;
     setUserGuess(option);
+    const body = {
+      questionId: question.id,
+      userId: localStorage.getItem("uuid"),
+      date: question.date,
+      correct: option === question.correctAnswer,
+    };
+    fetch(`${import.meta.env.VITE_API_URL}/responses`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
   };
 
   return (
