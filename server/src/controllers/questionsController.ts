@@ -2,6 +2,20 @@ import express from "express";
 import { firestore } from "../utils/firebase";
 import { Question } from "../types/Question";
 
+const shuffle = <T>(arr: Array<T>): Array<T> => {
+  let currentIndex = arr.length;
+  while (currentIndex > 0) {
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    const tmp = arr[currentIndex];
+
+    arr[currentIndex] = arr[randomIndex];
+    arr[randomIndex] = tmp;
+  }
+
+  return arr;
+};
+
 export const getQuestion = async (
   req: express.Request,
   res: express.Response
@@ -22,14 +36,15 @@ export const getQuestion = async (
     }
     const result = querySnapshot.docs[0].data();
     const id = querySnapshot.docs[0].id;
-    const question = {
+    const question: Question = {
       id,
       type: result.type,
       question: result.question,
       category: result.category,
       correctAnswer: result.correct_answer,
-      incorrectAnswers: result.incorrect_answers,
+      options: shuffle(result.incorrect_answers.concat(result.correct_answer)),
       date: result.date,
+      difficulty: result.difficulty,
     };
     res.status(200).json(question);
     return;
