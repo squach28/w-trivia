@@ -2,14 +2,14 @@ name: Publish Server Docker Image
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
@@ -24,7 +24,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          
+
       - name: Build and publish Docker image
         id: push
         uses: docker/build-push-action@v6
