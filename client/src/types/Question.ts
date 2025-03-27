@@ -3,7 +3,7 @@ export type Question = {
   date: string;
   question: string;
   correctAnswer: string;
-  incorrectAnswers: Array<string>;
+  options: Array<string>;
   difficulty: string;
   type: string;
   category: string;

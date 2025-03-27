@@ -19,7 +19,6 @@ const parseHTML = (html: string) => {
 };
 
 const QuestionItem = ({ question }: QuestionProps) => {
-  const options = [...question.incorrectAnswers, question.correctAnswer];
   const [userGuess, setUserGuess] = useState<string | null>(null);
 
   const onOptionClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,7 +51,7 @@ const QuestionItem = ({ question }: QuestionProps) => {
             {parseHTML(question.question)}
           </Typography>
           <QuestionOptions
-            options={options}
+            options={question.options}
             onOptionClicked={onOptionClicked}
             userGuess={userGuess}
             correctAnswer={question.correctAnswer}
