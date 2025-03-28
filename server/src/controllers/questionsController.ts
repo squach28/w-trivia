@@ -64,6 +64,7 @@ export const addQuestions = async (
 
     if (questions === undefined) {
       res.status(400).json({ message: "Missing questions in body" });
+      return;
     }
 
     const questionsCollection = firestore.collection("questions");
